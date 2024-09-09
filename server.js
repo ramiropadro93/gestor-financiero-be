@@ -4,9 +4,12 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const movimientoRoutes = require('./routes/movimientoRoutes');
+const { createTables } = require('./db/db');
 
 const app = express();
 const port = 4001;
+
+createTables();
 
 const corsOptions = {
   origin: '*',

@@ -1,13 +1,28 @@
 // /db/db.js
 const { Pool } = require('pg');
 
+// const pool = new Pool({
+//     user: 'shenron93',
+//     host: 'dpg-crfinm2j1k6c73dn9o8g-a',
+//     database: 'gestor_pg55',
+//     password: 'XJUpl3APR0gCMxN39ilHAapihMTu2WN5',
+//     port: 5432,
+// });
+
 const pool = new Pool({
-    user: 'shenron93',
-    host: 'dpg-crfinm2j1k6c73dn9o8g-a',
-    database: 'gestor_pg55',
-    password: 'XJUpl3APR0gCMxN39ilHAapihMTu2WN5',
-    port: 5432,
+  connectionString: 'postgresql://shenron93:XJUpl3APR0gCMxN39ilHAapihMTu2WN5@dpg-crfinm2j1k6c73dn9o8g-a.oregon-postgres.render.com/gestor_pg55',
+  ssl: {
+    rejectUnauthorized: false, 
+  },
 });
+
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'gestor',
+//   password: '38050222',
+//   port: 5432,
+// });
 
 const createTables = async () => {
     try {
@@ -28,8 +43,6 @@ const createTables = async () => {
         console.error('Error creating tables:', err);
     }
 };
-
-createTables();
 
 module.exports = {
     pool,
