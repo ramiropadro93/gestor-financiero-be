@@ -2,19 +2,11 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false, 
-  },
-});
-
-pool.connect((err, client, release) => {
-  console.log('Connecting to PostgreSQL database');
-  console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
-  if (err) {
-    return console.error('Error acquiring client', err.stack);
-  }
-  console.log('Connected to PostgreSQL database');
+  user: 'shenron93',
+  host: 'dpg-crfinm2j1k6c73dn9o8g-a',
+  database: 'gestor_pg55',
+  password: 'XJUpl3APR0gCMxN39ilHAapihMTu2WN5',
+  port: 5432,
 });
 
 module.exports = pool;
