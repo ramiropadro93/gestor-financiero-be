@@ -1,11 +1,9 @@
-// /services/expenseService.js
-const db = require('../db/db');
 const pool = require('../db/db');
 
 // Función para obtener todos los gastos
 const getMovimientos = async () => {
   try {
-    const res = await db.query('SELECT * FROM Movimientos');
+    const res = await pool.query('SELECT * FROM Movimientos');
     return res.rows;
   } catch (err) {
     throw new Error(`Error getting movements: ${err.message}`);
@@ -50,7 +48,7 @@ const updateMovimiento = async (
   medio
 ) => {
   try {
-    const res = await db.query(
+    const res = await pool.query(
       'UPDATE movimientos SET descripcion = $1, tipo = $2, monto = $3, categoria = $4, recurrente = $5, medio = $6 WHERE id = $7 RETURNING *',
       [descripcion, tipo, monto, categoria, recurrente, medio, id]
     );
@@ -63,7 +61,7 @@ const updateMovimiento = async (
 // Función para eliminar un gasto
 const deleteMovimiento = async (id) => {
   try {
-    const res = await db.query(
+    const res = await pool.query(
       'DELETE FROM movimientos WHERE id = $1 RETURNING *',
       [id]
     );
