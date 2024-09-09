@@ -1,4 +1,4 @@
-const pool = require('../db/db');
+const { pool } = require('../db/db');
 
 // Función para obtener todos los gastos
 const getMovimientos = async () => {
