@@ -2,9 +2,16 @@ const { pool } = require('../db/db');
 
 // Función para obtener todos los gastos
 const getMovimientos = async () => {
+  const query = `
+    SELECT * 
+    FROM movimientos
+    WHERE EXTRACT(MONTH FROM Fecha) = EXTRACT(MONTH FROM CURRENT_DATE)
+      AND EXTRACT(YEAR FROM Fecha) = EXTRACT(YEAR FROM CURRENT_DATE);
+  `;
+
   try {
-    const res = await pool.query('SELECT * FROM Movimientos');
-    return res.rows;
+    const res = await pool.query(query);
+    return res.rows; // Devuelve solo los movimientos del mes actual
   } catch (err) {
     throw new Error(`Error getting movements: ${err.message}`);
   }
