@@ -71,9 +71,26 @@ const deleteMovimiento = async (id) => {
   }
 };
 
+const getGastosPorCategoria = async () => {
+  const query = `
+    SELECT Categoria, SUM(Monto) AS total, MAX(Fecha) AS fecha
+    FROM movimientos
+    WHERE TipoMovimiento = 'Egreso'
+    GROUP BY Categoria;
+  `;
+
+  try {
+    const res = await pool.query(query);
+    return res.rows; // Devuelve la lista de categorías con el total de gastos
+  } catch (err) {
+    throw new Error(`Error getting expenses by category: ${err.message}`);
+  }
+};
+
 module.exports = {
   getMovimientos,
   createMovimiento,
   updateMovimiento,
   deleteMovimiento,
+  getGastosPorCategoria,
 };
